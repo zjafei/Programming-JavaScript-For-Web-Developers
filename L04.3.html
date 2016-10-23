@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    // 垃圾收集(释放内存)
+    //     标记清除 垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记，然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记。而在此之后再被加上标记的变量将被视为准备删除的变量，最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。
+    //     引用计数 记录每个值被引用的次数 被赋给一个变量，则该值的引用次数加 1 相反减 1 引用次数变成 0 进行回收
+    //     引用计数的弊端 对变量的相互引用导致计数永远不为 0 无法回收
+    function problem() {
+        var a = {};
+        var b = {};
+        a.b = b;
+        b.a = a;
+    }
+    // a 和 b 通过各自的属性相互引用 这两个对象的引用次数都是 2 在离开环境后所占用的内存还是不能被回收
+    // 在 IE8 中 BOM 和 DOM使用C++以 COM（Component Object Model，组件对象模型）对象的形式实现的而 COM 对象的垃圾收集机制采用的就是引用计数策略
+    // 所以在 IE8 中针对DOM 和 BOM 的互相引用在回收的时候最好是手动设置对象为 null
+
+    var element = document.getElementById("some_element");
+    var myObject = new Object();
+    myObject.element = element;
+    element.someObject = myObject;
+    myObject.element = null;
+    element.someObject = null;
+
+    // window.CollectGarbage() ie立即回收内存的方法
+    // 浏览器分配给javascript的内存很少 所以代码要精简
+</script>
+</body>
+</html>

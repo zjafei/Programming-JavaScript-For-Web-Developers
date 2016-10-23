@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    // 只能操作一个值的操作符叫做一元操作符
+    // 1. 递增和递减操作符 前置式 后置式
+    var a = 29;
+    var b = --a + 2;// 前置式 先修改变量 后计算
+    console.log(a);// 28
+    console.log(b);// 30
+    var c = 29;
+    var d = c-- + 2;// 后置式 先计算 后修改变量
+    console.log(c);// 28
+    console.log(d);// 31
+
+    // 递增和递减操作符可以对任何值都适用
+    // 在应用于一个包含有效数字字符的字符串时，先将其转换为数字值，再执行加减 1 的操作。字符串变量变成数值变量
+    var e = '111';
+    console.log(++e);// 112
+    // 在应用于一个不包含有效数字字符的字符串时，将变量的值设置为 NaN（第 4章将详细讨论）。字符串变量变成数值变量
+    var f = '111dd';
+    console.log(++f);// NaN
+    // 在应用于布尔值 false 时，先将其转换为 0再执行加减 1的操作。布尔值变量变成数值变量
+    var g = false;
+    console.log(++g);// 1
+    // 在应用于布尔值 true 时，先将其转换为 1再执行加减 1的操作。布尔值变量变成数值变量
+    var h = true;
+    console.log(++h);// 2
+    // 在应用于浮点数值时，执行加减 1的操作（会产生浮点小数的误差）
+    var i = 10.00002;
+    console.log(++i);// 11.00002
+    // 在应用于对象时，先调用对象的 valueOf()方法以取得一个可供操作的值。然后对该值应用前述规则。如果结果是 NaN，则在调用 toString() 方法后再应用前述规则。对象变量变成数值变量。
+    var j = {};
+    console.log(++j);// NaN
+    var k = {
+        valueOf: function () {
+            return 10;
+        }
+    };
+    console.log(++k);// 11
+    var l = {
+        toString: function () {
+            return '12';
+        }
+    };
+    console.log(++l);// 13
+
+    // 一元加和减操作符
+    //一元加和减操作符主要用于基本的算术运算，也可以用于转换数据类型。
+    // 一元加操作符
+    var num0 = 25;// Number 没有改变
+    num0 = +25;
+    // 针对 String Boolean Object 会调用 valueOf() 或 toString()
+    var s0 = '01.1';//
+    s0 = +s0;// 1.1
+    var s1 = "z";
+    s1 = +s1;// NaN
+    var b0 = true;
+    b0 = +b0; // 1
+    var b1 = false;
+    b1 = +b1; // 0
+    var o0 = {
+        valueOf: function () {
+            return -1;
+        }
+    };
+    o0 = +o0; // -1
+
+    var num1 = 25;
+    num1 = -num1;    // 变成了-25
+    var s2 = '01.1';//
+    s2 = -s2;// -1.1
+    var s3 = "z";
+    s3 = -s3;// NaN
+    var b2 = true;
+    b2 = -b2; // -1
+    var b3 = false;
+    b3 = -b3; // 0
+    var o1 = {
+        valueOf: function () {
+            return -1;
+        }
+    };
+    o1 = -o1; // 1
+</script>
+</body>
+</html>

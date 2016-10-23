@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    /**
+     * 数据特性
+     * [[Configurable]]：表示能否通过 delete 删除属性从而重新定义属性
+     * [[Enumerable]]：  表示能否通过 for-in 循环返回属性
+     * [[Writable]]：    表示能否修改属性的值
+     * [[Value]]：       包含这个属性的数据值
+     */
+    var person = {};
+    Object.defineProperty(person, "name", {//设定对象属性的数据属性 （对象 属性名称 数据属性）
+        writable: false,//不可修改
+        configurable: true,//可以删除
+        enumerable: true,//可以被枚举
+        value: "Nicholas"
+    });
+
+    console.log(person.name);  //"Nicholas"
+    person.name = "Greg";
+    console.log(person.name);  //"Nicholas"
+    delete person.name;
+    console.log(person.name);  //"Nicholas"
+    for (var t in person) {
+        console.log('Property:' + t);
+    }
+
+    var book = {};
+    Object.defineProperty(book, "_year", {//设定对象属性的数据属性 （对象 属性名称 数据属性）
+        writable: true,//不可修改
+        configurable: false,//可以删除
+        enumerable: true,//可以被枚举
+        value: 2004
+    });
+    Object.defineProperty(book, "edition", {//设定对象属性的数据属性 （对象 属性名称 数据属性）
+        writable: true,//不可修改
+        configurable: false,//可以删除
+        enumerable: true,//可以被枚举
+        value: 1
+    });
+    /**
+     * 访问器属性
+     * [[Configurable]]：表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为数据属性。
+     * [[Enumerable]]：  表示能否通过 for-in 循环返回属性。
+     * [[Get]]：         在读取属性时调用的函数。默认值为 undefined。
+     * [[Set]]：         在写入属性时调用的函数。默认值为 undefined。
+     */
+    Object.defineProperty(book, "year", {
+        get: function () {
+            return this._year;
+        },
+        set: function (newValue) {
+            if (newValue > 2004) {
+                this._year = newValue;
+                this.edition += newValue - 2004;
+            }
+        }
+    });
+    book.year = 2005;
+    console.log(book._year);  //2
+    console.log(book.edition);  //2
+
+    /**
+     * 定义多个属性的特性
+     */
+    var book1 = {};
+    Object.defineProperties(book1, {
+        _year: {
+            writable: true,//不可修改
+            configurable: false,//可以删除
+            enumerable: true,//可以被枚举
+            value: 2004
+        },
+        edition: {
+            writable: true,//不可修改
+            configurable: false,//可以删除
+            enumerable: true,//可以被枚举
+            value: 1
+        },
+        year: {
+            get: function () {
+                return this._year;
+            },
+            set: function (newValue) {
+                if (newValue > 2004) {
+                    this._year = newValue;
+                    this.edition += newValue - 2004;
+                }
+            }
+        }
+    });
+
+    /**
+     * 读取属性的特性
+     */
+    var descriptor = Object.getOwnPropertyDescriptor(book1, "_year");
+    console.log(descriptor.writable);     //true
+    console.log(descriptor.configurable); //false
+    console.log(descriptor.enumerable);   //true
+    console.log(descriptor.value);        //2004
+
+    var descriptor1 = Object.getOwnPropertyDescriptor(book, "year");
+    console.log(descriptor1.value);        //undefined
+    console.log(descriptor1.enumerable);   //false
+    console.log(typeof descriptor1.get);  //"function"
+
+    /**
+     * 内部不不暴露的属性应该设为不可枚举 Enumerable 不可删除 Configurable
+     * 然后通过一个其他的属性去关联他 关联的方法不可以枚举 不可以修改 不可以删除
+     */
+
+    var myAry = {};
+    Object.defineProperties(myAry, {
+        _length: {
+            writable: true,//
+            configurable: false,//可以删除
+            enumerable: false,//可以被枚举
+            value: 0
+        },
+        push: {
+            writable: false,//不可修改
+            configurable: false,//可以删除
+            enumerable: true,
+            value: function (x) {
+                this[this._length] = x;
+                this._length++;
+            }
+        },
+        indexOf: {
+            writable: false,//不可修改
+            configurable: false,//可以删除
+            enumerable: true,
+            value: function (x) {
+                for (var i in this) {
+                    if (x === this[i]) {
+                        return i;
+                    } else {
+                        return -1;
+                    }
+                }
+            }
+        },
+        length: {
+            get: function () {
+                return this._length;
+            },
+            set: function (x) {
+                for (var i = this._length; i < x; i++) {
+                    this[i] = undefined;
+                }
+                this._length = x;
+            }
+        }
+    });
+    myAry.push('x');
+    console.log('------------------');
+    console.log(myAry[0]);
+    console.log(myAry.length);
+    myAry.length = 2;
+    console.log(myAry.length);
+    myAry.push('y');
+    console.log(myAry[1]);
+    myAry[1] = 'ok';
+    console.log(myAry[1]);
+    console.log(myAry.length);
+    console.log(myAry.indexOf('z'));
+</script>
+</body>
+</html>

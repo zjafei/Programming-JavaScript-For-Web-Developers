@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// break 直接跳出
+	for (var i = 0; i < 10; i++) {
+		for (var h = 0; h < 10; h++) {
+			if (h % 3 === 2) {
+				break;
+			}
+			console.log(i + '/' + h);
+		}
+	}
+	// continue 退出当前
+	for (var i = 0; i < 10; i++) {
+		for (var h = 0; h < 10; h++) {
+			if (h % 3 === 2) {
+				continue;
+			}
+			console.log(i + '/' + h);
+		}
+	}
+</script>
+</body>
+</html>

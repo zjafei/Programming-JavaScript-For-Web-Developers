@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8">
+<head>
+    <title>无标题文档</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit"/>
+    <!-- 在XHTML中的用法 -->
+    <script type="text/javascript">
+        function compare(a, b) {
+            // 有左箭头或有箭头不符合xhtml的规范可以用 &lt; 和 &gt;
+            if (a &lt; b) {
+                alert("A is less than B");
+            } else if (a &gt; b) {
+                alert("A is greater than B");
+            } else {
+                alert("A is equal to B");
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        // 但是过多的使用转义支付会使得脚本的可读性大大下降
+        // 可以使用 <![CDATA[]]> 来包含脚本
+        // 但是有的浏览器不支持 <![CDATA[]]> 标签 所以要注释掉
+        // <![CDATA[
+        function compare(a, b) {
+            if (a < b) {
+                alert("A is less than B");
+            } else if (a > b) {
+                alert("A is greater than B");
+            } else {
+                alert("A is equal to B");
+            }
+        }
+        // ]]>
+    </script>
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/19
+ * Time: 15:03
+-->
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    /**
+     * 基本类型也有属性
+     */
+    var s0 = 'good boy';
+    var s1 = s0.substring(2);
+    /**
+     * 但是给基本类型添加属性并不起作用
+     */
+    var s2 = 'hot girl';
+    s2.color = 'red';
+    console.log(s2.color);// undefined
+
+    /**
+     * Boolean
+     */
+    var falseObject = new Boolean(false);
+    console.log(falseObject && true);// true：object 与 true 比较
+    console.log(typeof falseObject);// object
+    console.log(falseObject instanceof Boolean);// true
+    var falseValue = false;
+    console.log(falseValue && true);// false：boolean 与 true 比较
+    console.log(typeof falseValue);// boolean
+    console.log(falseValue instanceof Boolean);// false
+
+    /**
+     * Number
+     */
+    var num = 10;
+    console.log(num.toString());   //"10"
+    console.log(num.toString(2));  //"1010" 二进制
+    console.log(num.toString(8));  //"12"   八进制
+    console.log(num.toString(10)); //"10"   十进制
+    console.log(num.toString(16)); //"a"    十六进制
+    console.log(10.005.toFixed(2));  //"10.01" 保留两位小数 四舍五入
+    console.log(10.0004.toFixed(3)); //"10.000" 保留三位小数 四舍五入
+    console.log(99.0.toExponential()); //"9.9e+1" 科学记数法
+    console.log(99.0.toPrecision(1));  //"1e+2"
+    console.log(99.0.toPrecision(2));  //"99"
+    console.log(99.0.toPrecision(3));  //"99.0"
+    var numberObject = new Number(10);
+    var numberValue = 10;
+    console.log(typeof numberObject);   //"object"
+    console.log(typeof numberValue);    //"number"
+    console.log(numberObject instanceof Number);  //true
+    console.log(numberValue instanceof Number);   //false
+
+    /**
+     * String
+     */
+    var str0 = 'hello world';
+    console.log(str0.length);// 11
+    console.log(str0.charAt(1));// 'e'
+    console.log(str0.charCodeAt(1));// 101
+    console.log(str0[1]);// 'e'
+    console.log(str0.concat(' ', '111', ' ', str0, ' ', '222'));// 将多个字符串连接起来
+    //slice() substr() substring() 切割字符串 第一个参数表示起始位置 没有第二个参数表示到结尾
+    console.log(str0.slice(3));        //"lo world"
+    console.log(str0.substring(3));    //"lo world"
+    console.log(str0.substr(3));       //"lo world"
+    console.log(str0.slice(3, 7));     //"lo w" 第二个表示结束位置
+    console.log(str0.substring(3, 7)); //"lo w" 第二个表示结束位置
+    console.log(str0.substr(3, 7));    //"lo worl" 第二个表示字符串长度
+    console.log(str0.slice(-3));       //"rld"
+    console.log(str0.substring(-3));   //"hello world"
+    console.log(str0.substr(-3));      //"rld"
+    console.log(str0.slice(3, -4));    //"lo w" 第二个参数为负数表示从结尾开始倒数
+    console.log(str0.substring(3, 0));//"hel"//第二个参数为0或负数的情况下 第一个参数表示从0开始的切割长度
+    console.log(str0.substring(3, -5));//"hel"
+    console.log(str0.substr(3, -1));   //""（空字符串）//第二个参数不能为负数
+    //indexOf()从左往右开始匹配 lastIndexOf()从右往左开始匹配 匹配得到的数字还是从左往右来计算的 第二个数字表示从什么位置开始匹配
+    console.log('hello world'.indexOf('o'));
+    console.log('hello world'.lastIndexOf('o'));
+    console.log('hello world'.indexOf('o', 6));
+    console.log('hello world'.lastIndexOf('o', 6));
+    //trim
+    console.log("   hello world   ".trim());
+    //toLowerCase()、toLocaleLowerCase()、toUpperCase() toLocaleUpperCase()
+    var stringValue = "hello world";
+    console.log("Hello World".toLocaleUpperCase());  //"HELLO WORLD"
+    console.log("Hello World".toUpperCase());        //"HELLO WORLD"
+    console.log("Hello World".toLocaleLowerCase());  //"hello world"
+    console.log("Hello World".toLowerCase());        //"hello world"
+    //字符串的模式匹配方法
+    var text = "cat, bat, sat, fat";
+    var pattern = /.at/;
+    //match
+    var matches = text.match(pattern);
+    console.log(matches);            //0
+    console.log(matches.index);            //0
+    console.log(matches[0]);                //"cat"
+    console.log(pattern.lastIndex);         //0
+    //search
+    var pos = text.search(/at/);
+    console.log(pos);            //0
+    //replace
+    var result = text.replace(/at/g, "ond");
+    console.log(result);    //"cond, bond, sond, fond"
+    console.log(text.replace(/(.at)/g, "word ($1)"));//匹配第n个捕获组的子字符串，其中n等于0～9。例如，$1是匹配第一个捕获组的子字符串，$2是匹配第二个捕获组的子字符串，以此类推。如果正则表达式中没有定义捕获组，则使用空字符串 word (cat), word (bat), word (sat), word (fat)
+    console.log(result.replace(/ond/g, "$$"));    //匹配$ "cond, bond, sond, fond"
+
+    function htmlEscape(text) {
+        return text.replace(/[<>"&]/g, function (match, pos, originalText) {//模式的匹配项 模式匹配项在字符串中的位置 原始字符串
+            console.log(match);
+            console.log(pos);
+            console.log(originalText);
+            switch (match) {
+                case "<":
+                    return "&lt;";
+                case ">":
+                    return "&gt;";
+                case "&":
+                    return "&amp;";
+                case "\"":
+            }
+                    return "&quot;";
+
+        });
+    }
+    console.log(htmlEscape("<p class=\"greeting\">Hello world!</p>"));
+    //split()
+    var colorText = "red,blue,green,yellow";
+    console.log(colorText.split(","));          //["red", "blue", "green", "yellow"]
+    console.log(colorText.split(",", 2));       //["red", "blue"]
+    console.log(colorText.split(/[e,o]/));     //["r", "d", "blu", "", "gr", "", "n", "y", "ll", "w"]
+    //localeCompare() 逐个比较字母 在前返回1 相等返回0 在后返回-1
+    var stringValue = "yellow";
+    console.log(stringValue.localeCompare("yaick"));      //1
+    console.log(stringValue.localeCompare("yellow"));      //0
+    console.log(stringValue.localeCompare("zoo"));         //-1
+    //fromCharCode() 接收一或多个字符编码，然后将它们转换成一个字符串
+    console.log(String.fromCharCode(104, 101, 108, 108, 111)); //"hello"
+    //HTML方法
+    /*
+    anchor(name)       <a name= "name">string</a>
+     big()              <big>string</big>
+     bold()             <b>string</b>
+     fixed()            <tt>string</tt>
+     fontcolor(color)   <font color="color">string</font>
+     fontsize(size)     <font size="size">string</font>
+     italics()          <i>string</i>
+     link(url)          <a href="url">string</a>
+     small()            <small>string</small>
+     strike()           <strike>string</strike>
+     sub()              <sub>string</sub>
+     sup()              <sup>string</sup> */
+</script>
+</body>
+</html>

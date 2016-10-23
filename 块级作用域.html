@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	if (5 > 3) {
+		var i = 8;
+	}
+	console.log(i);// 8 可以获取
+
+	var i = 0
+	while (i < 10) {
+		var t = 10;
+		i++;
+	}
+	console.log(t);// 10 可以获取
+
+	for(var i = 0; i < 10; i++){
+		var y = i;
+	}
+	console.log(y);// 9 可以获取
+
+	function foo(){
+		var x = 10;
+	}
+	foo();
+	console.log(x);// ReferenceError: x is not defined 不可以获取
+</script>
+</body>
+</html>

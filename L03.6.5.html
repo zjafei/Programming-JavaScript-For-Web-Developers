@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// for-in 语句是一种精准的迭代语句，可以用来枚举对象的属性
+	// for (property in expression) statement
+	for (var propName in window) {
+		console.log(propName);
+	}
+
+	var ary = {
+		'0': 0,
+		'1': 1,
+		'2': 2,
+		'3': 3,
+		'4': 4,
+		'5': 5,
+		'xx': null,
+		'6': 6,
+		'7': 7,
+		'8': 8,
+		'9': 9
+	};
+	for (var x in ary) {
+		console.log(x);
+	}
+</script>
+</body>
+</html>

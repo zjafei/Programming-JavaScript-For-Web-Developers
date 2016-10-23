@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript" charset="utf-8">
+        // src：可选。表示包含要执行代码的外部文件。
+        // type：可选 表示MIME类型
+        // async：可选 异步加载 只对外部脚本文件有效
+        // defer：可选 脚本可以延迟到文档完全被解析和显示之后再执行 只对外部脚本文件有效
+        // charset：可选 表示代码的字符集
+        // language：已废弃 大多数浏览器会忽略这个属性，因此也没有必要再用了
+    </script>
+    <!--用<script>元素嵌入JavaScript代码-->
+    <script type="text/javascript">
+        function sayHi() {
+            alert("Hi!");
+        }
+    </script>
+
+    <!--不要在代码中的任何地方出现"</script>"字符串 包括在各种形式的注释中-->
+    <!--如果必须使用 可以使用转义符转义-->
+    <script type="text/javascript">
+        function sayScript() {
+            /*alert("<\/script>");*/
+            alert("<\/script>");
+        }
+    </script>
+
+    <!--通过<script>元素来包含外部JavaScript文件 src属性就是必需的-->
+    <!--外部 JavaScript文件不必带有.js扩展名 但是确保服务器能返回正确的 MIME类型-->
+    <!--外部 JavaScript文件 其<script>和</script>标签之间的 JavaScript 代码将被忽略-->
+    <!--外部 JavaScript文件 可以跨域使用-->
+    <!--外部 JavaScript文件 只要不存在 defer 和 async 属性 默认是按照script标签的顺序来逐个加载的-->
+    <script type="text/javascript" src="example00.js"></script>
+    <!--defer 是等页面记载完了以后执行 以下的比较是等html加载完毕后执行 那么我在这里执行上面的方法也没问题 只是等html加载完毕后执行 加载早就加载了-->
+    <script type="text/javascript" defer="defer" src="example02.js"></script>
+    <!--async 控制多个script标签的加载熟悉 以下的比较是异步加载 如果我在里面写方法只要不执行应该是没有错误的-->
+    <script type="text/javascript" async="async" src="example01.js"></script>
+
+
+
+    <!--script标签的位置-->
+    <!--一般script标签都放在head元素中 引用元素都存放在一处
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Example HTML Page</title>
+        <script type="text/javascript" src="example1.js"></script>
+        <script type="text/javascript" src="example2.js"></script>
+    </head>
+    <body>
+    &lt;!&ndash; 这里放内容 &ndash;&gt;
+    </body>
+    </html>
+    但是这样就意味着只有等所有的javascript代码下载、解析 执行 完成以后才会出现页面的内容 javascript多了 会出现长时间的空白页面
+
+    现在是
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Example HTML Page</title>
+      </head>
+      <body>
+        <script type="text/javascript" src="example1.js"></script>
+        <script type="text/javascript" src="example2.js"></script>
+        </body>
+    </html>
+    可以减少页面加载的时间
+    -->
+
+</head>
+<body id="t">
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+ok<br>
+<script type="text/javascript">
+    document.getElementById("t").innerHTML = document.getElementById("t").innerHTML + 'script code in the end of body tag<br>';
+</script>
+</body>
+</html>

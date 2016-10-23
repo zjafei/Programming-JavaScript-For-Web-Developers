@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript">
+        // Undefined类型只有一个值 undefined （引入undefined这个值是为了正式区分空对象指针与未经初始化的变量）
+        // x > 5;想怎样拿来就用 连声明都没有的直接报错
+        // var a 未经初始化就是 只声明了一个变量但是都不声明是什么类型的数据
+        // 空对象指针就是null 声明了一个对象指针 但是这个对象指针并不指向对象
+        // var x = new Object(); 和 var x = {}; 指针指向一个{}对象
+
+        var message;//声明但未初始化
+        console.log('message === undefined ' + (message === undefined)); // true
+        // 要区别尚未定义的变量与未经初始化的变量
+        // var age
+        // console.log(age);// age is not defined
+        // 对未初始化的变量和未声明的变量执行 typeof 操作符都返回了 undefined 值
+        // 所以最好使用显式声明（var v = 1;） 这样值为 undefined 的变量都是为声明的变量
+        console.log('message typeof ' + typeof message);// undefined
+        console.log('age typeof ' + typeof age);// undefined
+
+        // 未声明就使用 系统会ReferenceError: x is not defined
+        x > 5;//这里的x都未声明
+        //
+        console.log(typeof z);
+    </script>
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+
+</body>
+</html>

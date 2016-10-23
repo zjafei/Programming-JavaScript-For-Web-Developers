@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// 执行环境及作用域
+	// 全局执行环境是最外围的一个执行环境。根据 ECMAScript实现所在的宿主环境不同，表示执行环境的对象也不一样。在 Web浏览器中，全局执行环境被认为是 window 对象
+	// 某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量和函数定义也随之销毁（全局执行环境直到应用程序退出——例如关闭网页或浏览器——时才会被销毁）
+	// 作用链
+	// 1.作用域内部的可以访问作用域外部的 作用域外部的不能访问作用域内部的
+	// 2.查询一个属性的时候作用域遵循就近原则 查询不到逐级网上 直到全局作用域为止
+	// 延长作用域
+	var b ={
+		'name':'eric'
+	};
+	function a() {
+		with (b){// with只起到了作用链的延伸 这里的{}没有产生一个新的作用域
+			 t = name + 'eric';//name 是 b 对象的 name 但是不加 var 创建的变量都是window下的;
+			 var c = '00000';
+		}
+		alert(c);// c 是 a 函数作用域环境的局部变量
+	}
+	a();
+
+	//没有块级作用域
+	if (true) {
+		var color = "blue";
+	}
+	alert(color);    //"blue"
+
+	//声明变量
+	// 使用 var 声明的变量会自动被添加到最接近的环境中。在函数内部，最接近的环境就是函数的局部环境；
+	// 在 with 语句中，最接近的环境是函数环境。如果初始化变量时没有使用 var 声明，该变量会自动被添加到全局环境。
+	function add(num1, num2) {
+		var sum = num1 + num2;// 这里的 sum 是 add 函数的局部变量
+		return sum;
+	}
+	var result = add(10, 20);  //30
+	alert(sum);        //由于 sum 不是有效的变量，因此会导致错误
+	function add(num1, num2) {
+		sum = num1 + num2;// 这里的 sum 是全局部变量
+		return sum;
+	}
+
+	// 查询标识符 标识符在使用或赋值的时候 要确定这个标识符表示什么 如果在本作用域没有找到 就逐级作用链向上找 找到了就停止 找不到就继续 如果在顶级作用域都没有找到 就报错 而且作用链越短效率越高
+
+</script>
+</body>
+</html>

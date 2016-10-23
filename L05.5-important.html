@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    function sum1(num1, num2) {
+        return num1 + num2;
+    }
+    var sum2 = function (num1, num2) {//函数表达式定义函数
+        return num1 + num2;
+    };
+    var sum3 = new Function("num1", "num2", "return num1 + num2"); // 使用Function 构造函数  不推荐
+
+    /**
+     * 函数名只是指向函数的指针 所以多个函数名称可以指向一个函数
+     */
+    function f0() {
+        console.log('f0');
+    }
+    var f1 = f0;
+    f0 = null;
+    f1();
+
+    /**
+     * 函数没有重载 因为函数名只是函数的指针 所以在用同一个函数名重写函数的时候 函数被覆盖
+     */
+
+    function f2() {
+        console.log('f2');
+    }
+
+    function f2() {
+        console.log('new f2');
+    }
+    /**
+     * 以上的代码等价于
+     * var f2 = function (){
+         console.log('f2');
+     };
+     f2 = function (){
+         console.log('new f2');
+     };
+     */
+    f2();
+
+    /**
+     * 函数声明与函数表达式的区别
+     * 函数声明的方式 解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）
+     * 函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行
+     */
+    f3();
+    function f3() {
+        console.log('f3');
+    }
+    //f4();//出错
+    var f4 = function () {
+        console.log('f4');
+    };
+
+    /**
+     * 函数可以作为参数
+     */
+    function f5(arg) {
+        console.log(arg);
+    }
+
+    function f6(arg0, arg1) {
+        arg0(arg1);
+    }
+    f6(f5, 'ok');
+
+    /**
+     * 函数可以作为函数的返回值
+     */
+    function f6(arg) {
+        var f;
+        if (arg === 0) {
+            f = function () {
+                console.log('no');
+            };
+        } else {
+            f = function () {
+                console.log('ok');
+            };
+        }
+        return f;
+    }
+    var f7 = f6(0);
+    f7();
+
+    /**
+     * 函数的内部属性
+     */
+    /**
+     * callee 该属性是一个指针，指向拥有这个 arguments 对象的函数(一般用于递推函数)
+     * 看起来没什么作用 但是一般递归都会与函数名做紧密耦合 这样对代码的可扩展性与可维护性有制约
+     */
+    //下面两个函数作用是一样的 但是后面的用到arguments.callee 所以当函数名称发生改变或者函数名称不确定的时候代码更方便
+    function f8(num) {
+        if (num <= 0) {
+            return f8(num + 1);
+        } else {
+            return num;
+        }
+    }
+    function f8(num) {
+        if (num <= 0) {
+            return arguments.callee(num + 1);
+        } else {
+            return num;
+        }
+    }
+    console.log(f8(-9));
+    /**
+     * this：执行的环境对象
+     */
+    color = 'red';
+    function sayColor() {
+        console.log(this.color);
+    }
+    var o = {
+        color: 'blur',
+        sayColor: sayColor
+    };
+    sayColor();
+    o.sayColor();
+    /**
+     * caller 当前函数的函数的引用(就是找回是那个函数引用了我)不能为函数的 caller 属性赋值
+     */
+    function f9() {
+        switch (arguments.callee.caller) {
+            case null:
+                console.log('我没有被引用：)');
+                break;
+            case f10:
+                console.log('我被f10利用了：(');
+                break;
+            case f11:
+                console.log('我被f11利用了：(');
+                break;
+            case o1.c:
+                console.log('我被o1.c利用了：(');
+                break;
+        }
+    }
+    function f10() {
+        f9();
+    }
+    function f11() {
+        f9();
+    }
+    var o1 = {
+        c: function () {
+            f9();
+        }
+    };
+    f9();//没有被引用则出现null
+    f10();
+    f11();
+    o1.c();
+
+    /**
+     * 函数属性和方法
+     */
+    /**
+     * length表示函数希望接收的命名参数的个数
+     */
+    function f12() {
+        console.log(arguments.callee.length);
+    }
+    function f13(arg) {
+        console.log(arguments.callee.length);
+    }
+    function f14(arg0, arg1) {
+        console.log(arguments.callee.length);
+    }
+    f12();
+    f13();
+    f14();
+
+    /**
+     * apply(作用域, 参数数组) 和 call(作用域, 参数1, 参数2 ... 参数n) 主要是设置函数的作用域
+     */
+    sex = 'male';
+    var girl = {
+        sex: 'female'
+    };
+    function saySex() {
+        console.log(this.sex);
+    }
+    saySex();
+    saySex.apply(girl);
+    saySex.apply(window);
+
+    var guy = {
+        age: 25,
+        sayAge: function () {
+            console.log('I\'m ' + this.age);
+        }
+    };
+    var oldMan = {
+        age: 35,
+        sayAge: function () {
+            console.log(this.age + ' years old');
+        }
+    };
+    guy.sayAge.apply(oldMan);
+    oldMan.sayAge.apply(guy);
+
+    /**
+     * bind() 创建一个函数的实例，其 this 值会被绑定到传给 bind()函数的值
+     */
+    var sayOldManAgeWithGuyAction = guy.sayAge.bind(oldMan);
+    sayOldManAgeWithGuyAction();
+</script>
+</body>
+</html>

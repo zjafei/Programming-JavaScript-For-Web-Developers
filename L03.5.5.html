@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// 如果两个操作符都是数值，则执行常规的算术减法操作并返回结果；
+	console.log(5 - 3);// 2
+	// 如果有一个操作数是 NaN，则结果是 NaN；
+	console.log(NaN + 1);// NaN
+	// 如果是 Infinity 加 Infinity，则结果是 Infinity；
+	console.log(Infinity + Infinity);// Infinity
+	// 如果是-Infinity 加-Infinity，则结果是-Infinity；
+	console.log(-Infinity + -Infinity);// -Infinity
+	// 如果是 Infinity 加-Infinity，则结果是 NaN；
+	console.log(Infinity + -Infinity);// NaN
+
+	// 如果是+0减+0，则结果是+0；
+	// 如果是+0减 0，则结果是 0；
+	console.log(0 - 0);// 0
+	console.log(-0 - 0);// 0
+	console.log(0 + 0);// 0
+	console.log('0' + 0);// 00
+
+	// 对象、数值或布尔值，则调用它们的 toString()方法取得相应的字符串值，然后再应用前面关于字符串的规则。对于 undefined 和 null，则分别调用 String()函数并取得字符串"undefined"和"null"。
+	console.log(['2'] + 1);// 21
+	console.log([2] + 1);// 21
+	console.log([2] + [3]);// 23
+	console.log({valueOf: function () {
+				return 3;
+			}} + 3);// 6
+	console.log({valueOf: function () {
+				return '3';
+			}} + 3);// 33
+	console.log(undefined + '5');// undefined5
+	console.log(null + '5');// null5
+	console.log(5 + null);// 5
+	console.log(5 + undefined);// NaN
+</script>
+</body>
+</html>

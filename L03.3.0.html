@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript">
+        // javascript 中都是松散变量（变量仅仅是一个用于保存值的占位符）
+        // 定义变量：
+        // 未初始化的定义方式：var message;
+        // 未初始化的变量值是 undefined
+        // 初始化的定义方式： var message = 'hi';
+        // 变量可以在赋值的同时修改值的类型
+        // var t = 'cool';
+        // t = 100;//但是不推荐这样做
+        // 使用 var 操作符定义的变量是定义该变量的作用域的局部变量
+        // 局部变量会在作用域退出后销毁
+        //alert(t0);// 错误 ReferenceError: message is not defined
+        function test0() {
+            var t0 = 'h0';// 局部变量
+        }
+        test0();
+
+        // 省略了 var 操作符定义的变量是全局变量
+        function test1() {
+            t1 = "h1"; // 全局变量
+        }
+        test1();
+        alert(t1); // "hi"
+
+        // var 操作符可以一次定义多个变量 每个变量用逗号分开
+        var message, found = false, age;
+
+
+        // 严格模式下，不能定义名为 eval 或 arguments 的变量
+        var eval = 'ok';
+        alert(eval);
+
+        function text2() {
+            "use strict";// 函数内的严格模式标签对函数外部的代码是不监控的 但是在出错确实整个代码停止 即使函数未被调用
+            // var eval = 'ok';
+            alert(eval);
+        }
+        text2();
+    </script>
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+
+</body>
+</html>

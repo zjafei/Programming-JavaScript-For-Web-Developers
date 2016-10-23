@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+
+
+    <!--延迟脚本-->
+    <!--script的defer属性是外部引用代码的延迟执行属性 这里的延迟是延迟的执行 下载还是在遇到标签的时候就开始的-->
+    <!--按照html5的规范延迟脚本的顺序是按照标签顺序且先于 DOMContentLoaded 前执行 但是实际情况是随机顺序的 所以延迟脚本最好只有一个-->
+    <script type="text/javascript" defer="defer" src="example03.js"></script>
+    <script type="text/javascript" defer="defer" src="example04.js"></script>
+    <script type="text/javascript" defer="defer" src="example05.js"></script>
+    <script type="text/javascript" defer="defer" src="example06.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {// DOMContentLoaded, 包括页面上的图片等等。
+            try {
+                d.innerHTML = d.innerHTML + '07. DOM记载完毕(defer后)<br>';
+            } catch (e) {
+                document.getElementById("t").innerHTML = document.getElementById("t").innerHTML + '07. DOM记载完毕(defer前)<br>';
+            }
+
+        }, false);
+        window.addEventListener("load", function () {// load要等到所有页面元素加载完成才会触发, 包括页面上的图片等等。
+            d.innerHTML = d.innerHTML + '08. window加载完成<br>';
+        }, false);
+    </script>
+
+
+</head>
+<body id="t">
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+01. html<br>
+<script type="text/javascript">
+    document.getElementById("t").innerHTML = document.getElementById("t").innerHTML + '02. html结尾处的脚本<br>';
+</script>
+</body>
+</html>

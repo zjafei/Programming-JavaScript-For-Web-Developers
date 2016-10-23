@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    // 创建一个 Object 类型的实例
+    // 方法1 构造函数
+    var person0 = new Object();
+    person0.name = "Nicholas";
+    person0.age = 29;
+    // 方法2 用对象字面量
+    var person1 = {//属性名会自动转换为字符串
+        name: "Nicholas",
+        age: 29
+    };
+    var person2 = {};         //与 new Object()相同
+    person2.name = "Nicholas";
+    person2.age = 29;
+    //对象的属性的访问
+    // .
+    console.log(person0.name);
+    // []
+    console.log(person0["name"]);
+    // 类似于数组的[]法的好处是可以在[]内传递变量
+    var propertyName = "name";
+    console.log(person0[propertyName]);
+
+    //创建Array
+    //ECMAScript 数组的每一项可以保存任何类型的数据
+    //ECMAScript 数组的大小是可以动态调整的
+    var a0 = new Array();
+    var a1 = new Array(3);//创建一个length为3的数组
+    var a2 = Array(3);//创建一个length为3的数组
+    var a3 = new Array(3, 1, 2);//创建一个元素为3,1,2的数组
+    var a4 = Array(3, 1, 2);//创建一个元素为3,1,2的数组
+    var a5 = [];//创建一个空数组
+    var a6 = [3, 1, 2];//创建一个数组
+    var a7 = [3, 1, 2,];//这样不好 数组的length有可能是3也有可能是4
+    console.log(a6[0]);//读取值
+    console.log(a6[3]);//undefined
+    a6[8] = 'ok';// length 为 9
+    console.log(a6);//Array [ 3, 1, 2, <5 个空的存储位置>, "ok" ]
+
+    //小技巧 数组的length不是只读属性 所以可以通过改变数组的length来删除或添加尾部的元素
+    a6.length = 2;
+    console.log(a6);
+    a6[a6.length] = 2;
+    console.log(a6);
+    //判断是不是一个数组
+    console.log(Array.isArray(a6));//ie8不支持
+    //对象的基本三方法 toLocaleString()、toString()和 valueOf()
+//    alert(a6.valueOf());//走的是toString()
+    console.log(a6.valueOf());
+    console.log(a6.toString());
+    console.log(a6.toLocaleString());
+    //数组的toLocaleString()、toString()和 valueOf()其实是调用每个元素toLocaleString()、toString()和 valueOf()所返回的值的串联
+    var p1 = {
+        toString: function () {
+            return 'ma';
+        },
+        toLocaleString: function () {
+            return '马';
+        }
+    };
+    var p2 = {
+        toString: function () {
+            return 'zheng';
+        },
+        toLocaleString: function () {
+            return '正';
+        }
+    };
+    var ps = [p1, p2];
+    console.log(ps.toString());
+    console.log(ps.toLocaleString());
+    //使用join()方法来连接元素
+    console.log(ps.join('|'));
+</script>
+</body>
+</html>

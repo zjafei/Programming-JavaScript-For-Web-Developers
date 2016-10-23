@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+	<script type="text/javascript">
+		// String 类型用于表示由零或多个 16位Unicode字符 组成
+		var text0 = "This is the letter sigma: \u03a3.";// 字符字面量只算作一个字符
+		console.log(text0.length);// 28
+		// ECMAScript中的String类型是不可变的（要改变变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量）
+		var text1 = 'java';
+		text1 = text1 + 'script';
+		console.log(text1);
+		// 转换为字符串 有两种方法
+			// toString()（null 和 undefined没有这个方法）
+				//Boolean
+				console.log(true.toString());// 'true'
+				console.log(false.toString());// 'false'
+				// Number
+				var i = 10;
+				console.log(i.toString());// '10'
+				console.log(i.toString(2));// '1010' 可以设定转换参数
+				console.log(i.toString(8));// '12'
+				console.log(i.toString(10));// '10'
+				console.log(i.toString(16));// 'a'
+			// String()（适合在不清楚变量是否为 null 或 undefined 的时候）
+				// 转换规则：
+				// 如果值有 toString()方法，则调用该方法（没有参数）并返回相应的结果；
+				console.log(String(true));// 'true' 其实就是调用的 true.toString()
+				console.log(String(false));// 'false' 其实就是调用的 false.toString()
+				console.log(String(10));// '10' 其实就是调用的 var i = 10; i.toString()
+				// 如果值是 null，则返回"null"；
+				console.log(String(null));// null
+				// 如果值是 undefined，则返回"undefined"。
+				console.log(String(undefined));// undefined
+
+	</script>
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+
+</body>
+</html>

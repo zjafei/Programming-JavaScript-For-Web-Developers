@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// false 的等值字面量 空字符串 0 NaN undefined null false
+	// 逻辑非 ! （空字符串 0 NaN undefined null false 返回 true）
+	// 如果操作数是一个对象，返回 false；
+	console.log('!{}:' + !{});
+	console.log('![]:' + ![]);
+	// 如果操作数是一个空字符串，返回 true；
+	console.log('!"":' + !'');
+	// 如果操作数是一个非空字符串，返回 false；
+	console.log('!" ":' + !' ');
+	// 如果操作数是数值 0，返回 true；
+	console.log('!0:' + !0);
+	// 如果操作数是任意非 0数值（包括 Infinity），返回 false；
+	console.log('!Infinity:' + !Infinity);
+	// 如果操作数是 null，返回 true；
+	console.log('!null:' + !null);
+	// 如果操作数是 NaN，返回 true；
+	console.log('!NaN:' + !NaN);
+	// 如果操作数是 undefined，返回 true。
+	console.log('!undefined:' + !undefined);
+	// 同时使用两个逻辑非操作符就等于 Boolean()
+	console.log('!!undefined:' + !!undefined);
+	console.log('Boolean(undefined):' + Boolean(undefined));
+
+	// 逻辑与 操作数一与操作数二同时为 true 返回第二个数 （1.含空字符串 0 NaN undefined null false 返回 对应值 2.默认返回第二个值） &&断路与 就是说第一个条件不是 true 就中断操作
+	// 如果有一个操作数是 null，则返回 null；
+	// && 成立输出 后面一个操作数 不成立输出出错的那个操作数
+	console.log(true && null);// null
+	// 如果有一个操作数是 NaN，则返回 NaN；
+	console.log(true && NaN);// NaN
+	// 如果有一个操作数是 undefined，则返回 undefined。
+	console.log(true && undefined);// undefined
+	// 如果第一个操作数是对象（数组也属于对象），则返回第二个操作数；
+	console.log([] && 6);// 6
+	console.log({
+				name: 'eric', valueOf: function () {
+					return 8
+				}
+			} && '');// 6
+	console.log([] && false);// 6
+	console.log([] && function () {
+			});// 6
+	// 如果第二个操作数是对象，则只有在第一个操作数的求值结果为 true 的情况下才会返回该对象（断路与）；
+	console.log('ok' && {
+				name: 'eric', valueOf: function () {
+					return 8
+				}
+			});// object
+	console.log(1 && {
+				name: 'eric', valueOf: function () {
+					return 8
+				}
+			});// object
+	console.log(function () {
+			} && {
+				name: 'eric', valueOf: function () {
+					return 8
+				}
+			});// object
+	console.log([] && {
+				name: 'eric', valueOf: function () {
+					return 8
+				}
+			});// object
+	// 如果两个操作数都是对象，则返回第二个操作数；
+	console.log([] && []);// object
+	// & 和 && 的区别
+	var x = 0;
+	false && (x = 1);
+	console.log(x);// 0
+	false & (x = 1);
+	console.log(x);// 1
+
+	//都为true返回第一个
+	//都为false 返回第二个
+	//一个false一个true 返回为true的那个操作数
+	// 逻辑或 操作数一与操作数二同哪个为 true 返回 哪个
+	// 如果第一个操作数是对象，则返回第一个操作数；
+	console.log([] || NaN);// []
+	// 如果第一个操作数的求值结果为 false，则返回第二个操作数；
+	console.log(0 || 6);// 6
+	// 如果两个操作数都是对象，则返回第一个操作数；
+	console.log([0,1,3] || [4,5,6]);// [0,1,3]
+	// 如果两个操作数都是 null，则返回 null；
+	console.log(null || null);// null
+	// 如果两个操作数都是 NaN，则返回 NaN；
+	console.log(NaN || NaN);// NaN
+	// 如果两个操作数都是 undefined，则返回 undefined。
+	console.log(undefined || undefined);// undefined
+
+	/*
+	* 对于 | & 这个就不是什么简单的比较操作 这个是位或 和 位与
+	*
+	* 按位与（AND）:同为1返回1
+	* var num4 = 25 & 22;
+	* 25 0000 0000 0000 0000 0000 0000 0001 1001
+	* 22 0000 0000 0000 0000 0000 0000 0001 0110
+	* -------------------------------------------
+	* 0 0000 0000 0000 0000 0000 0000 0001 0000
+	* alert(num4); // 16
+	*
+	* 按位或（OR）:有一个为1返回1
+	* var num5 = 25 | 22;
+	* 25 0000 0000 0000 0000 0000 0000 0001 1001
+	* 22 0000 0000 0000 0000 0000 0000 0001 0110
+	* -------------------------------------------
+	* 0 0000 0000 0000 0000 0000 0000 0001 1111
+	* alert(num5);// 31
+	* */
+</script>
+</body>
+</html>

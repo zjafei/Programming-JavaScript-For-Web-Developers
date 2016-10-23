@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    // toString 与 valueOf 的区别
+    // 重写 valueOf 和 toString
+    var i = 0;
+    var obj2 = {
+        valueOf: function () {
+            i++;
+            console.log(i + ' valueOf');
+            return 30;
+        },
+        toString: function () {
+            i++;
+            console.log(i + ' toString');
+            return 'ok';
+        }
+    };
+    alert(obj2);            // 1.toString   'ok'
+    alert(obj2 > 10);       // 2.valueOf    true
+    alert(+obj2);           // 3.valueOf    30 运算
+    alert('' + obj2);       // 4.valueOf    30 有操作符是运算
+    alert(String(obj2));    // 5.toString   'ok' String 转型用 toString 很符合
+    alert(Number(obj2));    // 6.valueOf    30 Number转型用 valueOf 很符合 数字就是比较值
+    alert(obj2 == 'ok');    // 7.valueOf    false 有操作符是运算
+    alert(obj2 === '10');   // false    	valueOf与toString都没有走 是以为这个就是个简单的类型比较
+
+    // 重写 toString 但是没有重写 valueOf
+    var i = 0;
+    // a.没有重写 prototype 的 valueOf
+    // b.重写 prototype 的 valueOf 来证明
+    Object.prototype.valueOf = function () {
+        i++;
+        console.log(i + ' prototype valueOf');
+        return 30;
+    };
+    // a.没有重写 对象 的 valueOf
+    var obj3 = {
+        toString: function () {
+            i++;
+            console.log(i + ' toString');
+            return 'ok';
+        }
+    };
+    // a.在要使用valueOf的时候就调用对象的toString 这是因为 对象的 valueOf 是 Object prototype 的 valueOf 而 Object prototype 的 valueOf 调用的是 this.toString() 就是执行时 对象的 toString 的输出值转数字
+    // b.对象没有重写 valueOf 时调用的就是 Object prototype 的 valueOf
+    alert(obj3);            // 1. a.toString 'ok'       b.toString 'ok'
+    alert(obj3 > 20);       // 2. a.toString false      b.prototype valueOf true
+    alert(+obj3);           // 3. a.toString NaN        b.prototype valueOf 30
+    alert('' + obj3);       // 4. a.toString 'ok'       b.prototype valueOf '30' 还走的valueOf
+    alert(String(obj3));    // 5. a.toString 'ok'       b.toString 'ok'
+    alert(Number(obj3));    // 6. a.toString NaN        b.prototype valueOf 30
+    alert(obj3 == 'ok');    // 7. a.toString true       b.prototype valueOf false
+    alert(obj3 == 30);      // 8. a.toString false      b.prototype valueOf true
+
+    // 重写 valueOf 但是没有重写 toString
+    var i = 0;
+    // a.没有重写 prototype 的 toString
+    // b.重写 prototype 的 toString 来证明
+    Object.prototype.toString = function () {
+        i++;
+        console.log(i + ' prototype toString');
+        return 'ok';
+    };
+    var obj4 = {
+        valueOf: function () {
+            i++;
+            console.log(i + ' valueOf');
+            return 30;
+        }
+    };
+
+    // a.在 toString 的时候 就输出 [object Object] 这是因为 对象的 toString 是 Object prototype 的 toString 而 Object prototype 的 toString 输出的值就是 [object Object]
+    // b.对象没有重写 toString 时调用的就是 Object prototype 的 toString
+    alert(obj4);            //    a.[object Object]     1. b.prototype toString 'ok'
+    alert(obj4 > 20);       // 1. a.valueOf true        2. b.valueOf true
+    alert(+obj4);           // 2. a.valueOf 30          3. b.valueOf 30
+    alert('' + obj4);       // 3. a.valueOf '30'        4. b.valueOf '30'
+    alert(String(obj4));    //    a.[object Object]     5. b.prototype toString 'ok'
+    alert(Number(obj4));    // 4. a.valueOf 30          6. b.valueOf 30
+    alert(obj4 == 'ok');    // 5. a.valueOf false       7. b.valueOf false
+    alert(obj4 == 30);      // 6. a.valueOf true        8. b.valueOf true
+
+    // 原生的 Object.prototype.valueOf() 里面有调用 this.toString()
+    // 对象有 valueOf() 或 toString() 就用对象自己的 没有就用原型的 valueOf() 或 toString()
+    // 有 + - > < == != >= <= 操作符的用 valueOf() 但是字符的拼接除外
+    // 单独输出对象 用 toString() 如 alert(object)
+    // String() 用 toString()
+    // Number() 用 valueOf()
+</script>
+</body>
+</html>

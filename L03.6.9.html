@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	/*
+	switch 语句在比较值时使用的是全等操作符，因此不会发生类型转换（例如，字符串"10"不等于数值 10）。
+	switch (expression) {
+		case value: statement
+			break;
+		case value: statement
+			break;
+		case value: statement
+			break;
+		case value: statement
+			break;
+		default: statement
+	}
+	*/
+	// case 的值不一定是常量，可以是变量，甚至是表达式
+	var str = "hello";
+	switch (str) {
+		case "hello" + " world":
+			alert("Greeting was found.");
+			break;
+		case str:
+			alert("Greeting was found.");
+			break;
+		default:
+			alert("Unexpected message was found.");
+	}
+	// switch 可以使用 大于小于的范围比较 switch可以使用大于小于的范围比较 switch 可以使用大于小于的范围比较
+	var num = 25;
+	switch (true) {
+		case num < 0:
+			alert("Less than 0.");
+			break;
+		case num >= 0 && num <= 10:
+			alert("Between 0 and 10.");
+			break;
+		case num > 10 && num <= 20:
+			alert("Between 10 and 20.");
+			break;
+		default:
+			alert("More than 20.");
+	}
+
+</script>
+</body>
+</html>

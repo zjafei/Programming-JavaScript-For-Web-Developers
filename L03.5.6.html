@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// 任何操作数与 NaN 进行关系比较，结果都是 false
+	// 如果两个操作数都是数值，则执行数值比较。
+	console.log(5 > 3);// true
+	// 如果两个操作数都是字符串，则比较两个字符串对应的字符编码值。
+	console.log('a' > 'b');// false
+	// 如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较。
+	console.log(999 > '2');// true
+	console.log(999 > 'a');// false
+	// 如果一个操作数是对象，则调用这个对象的 valueOf()方法，用得到的结果按照前面的规则执行比较。如果对象没有 valueOf()方法，则调用 toString()方法，并用得到的结果根据前面的规则执行比较。
+	console.log(999 > {
+				valueOf: function () {
+					return 10000
+				}
+			});// false
+	console.log(999 > {
+				valueOf: function () {
+					return '2'
+				}
+			});// true
+	console.log(999 > {
+				valueOf: function () {
+					return 'a'
+				}
+			});// false
+	console.log([-1] > 1);// false
+	console.log([2] > 1);// true
+	console.log([99,99] > 1);// false
+	// 如果一个操作数是布尔值，则先将其转换为数值，然后再执行比较。
+	console.log(5 > true);// true
+	console.log(0.1 > true);// false
+	console.log(-1 > false);// false
+	console.log(-1 > false);// false
+
+</script>
+</body>
+</html>

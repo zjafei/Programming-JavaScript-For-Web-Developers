@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+	<script type="text/javascript">
+		// 创建一个对象
+		var obj0 = new Object();
+		// constructor：保存着用于创建当前对象的函数。
+		console.log(obj0.constructor);
+		// hasOwnProperty(propertyName)：用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。
+		function Obj1() {
+			this.age = 12;
+		}
+		var p = {
+			name: 'from Obj1',
+			color: 'yellow',
+			say: 'english',
+			cool: function () {
+				return 'aa';
+			}
+		};
+		Obj1.prototype = p;
+		obj1 = new Obj1();
+		console.log(obj1);
+		console.log('obj1 has own property name:' + obj1.hasOwnProperty('name'));
+		console.log('obj1 has own property color:' + obj1.hasOwnProperty('color'));
+		console.log('obj1 has own property age:' + obj1.hasOwnProperty('age'));
+		obj1.name = 'eric';
+		obj1.color = 'black';
+		console.log('obj1 has own property name:' + obj1.hasOwnProperty('name'));
+		console.log('obj1 has own property color:' + obj1.hasOwnProperty('color'));
+		console.log('obj1 has own property age:' + obj1.hasOwnProperty('age'));
+		// isPrototypeOf 判断对象的是不是另一个对象的原型
+		console.log('Object.prototype is prototype of obj1:' + Object.prototype.isPrototypeOf(obj1));
+		console.log('p is prototype of obj1:' + p.isPrototypeOf(obj1));
+		// propertyIsEnumerable 用于检查给定的属性是否能够使用 for-in 语句来枚举（就是在console能被显示出来的属性 能枚举与是不是来自原型的属性无关）
+		console.log(obj1);
+		for (var i in obj1) {
+			console.log(i + ' is enumerable');
+		}
+		// toLocaleString 返回对象的字符串表示，该字符串与执行环境的地区对应;
+		console.log(new Date().toLocaleString());// 2015/9/24 下午4:01:05
+		console.log(0xaaa.toLocaleString());// 2,730
+		// toString 返回对象的字符串表示
+		console.log(new Date().toString());
+		console.log(0xaaa.toString());
+		// valueOf 返回对象的字符串、数值或布尔值表示
+		console.log(new Date().valueOf());
+		console.log(0xaaa.valueOf());
+		// ECMA-262不负责定义宿主对象 如 JavaScript 中的 BOM 和 DOM
+	</script>
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+
+</body>
+</html>

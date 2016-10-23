@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// 引用类型 和 基本类型
+	// JavaScript不允许直接访问内存中的位置 当复制保存着对象的某个变量时，操作的是对象的引用。但在为对象添加属性时，操作的是实际的对象。
+
+	// 对于引用类型可以添加属性和方法
+	var person = new Object();
+	person.name = "Nicholas";
+	console.log(person.name); // "Nicholas"
+	// 对于基本
+	var name = "Nicholas";
+	name.age = 29;
+	console.log(name.age); // undefined
+
+	// 复制
+	// 基本类型
+	var num1 = 5;
+	var num2 = num1;
+	num1 = 6;
+	console.log(num2);
+	// 引用类型
+	var obj1 = new Object();
+	var obj2 = obj1;
+	obj1.name = 'Nicholas';
+	console.log(obj2.name);
+
+	// ECMAScript 中所有函数的参数都是按值传递的。也就是说，把函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样
+	// 在js中函数的参数的设定就是一个给函数arguments元素赋值的过程
+
+	// 基本类型的函数参数
+	function add(num) {
+		num += 10;
+		return num;
+	}
+	var num = 20;
+	var result = add(num);
+	console.log(num); //20
+	console.log(result); //30
+
+	// 引用类型的函数参数
+	function setName(obj) {
+		obj.name = "Nicholas";
+		obj = new Object();// 函数内部定义的局部对象 会在函数执行完毕后销毁
+		obj.name = "Greg";
+	}
+	var person = new Object();
+	setName(person);
+	console.log(person.name); //"Nicholas"
+
+	// 检测类型
+	// typeof
+	var s = "Nicholas";
+	var b = true;
+	var i = 22;
+	var u;
+	var n = null;
+	var o = new Object();
+
+	console.log(typeof s);   //string
+	console.log(typeof i);   //number
+	console.log(typeof b);   //boolean
+	console.log(typeof u);   //undefined
+	console.log(typeof n);   //object
+	console.log(typeof o);   //object
+
+
+	// instanceof 查看对象的原型 比较typeof更精确
+	var person = {};
+	var colors = [];
+	var pattern = new RegExp();
+	console.log(person instanceof Object); // 变量 person 是 Object 吗？
+	console.log(colors instanceof Array);  // 变量 colors 是 Array 吗？
+	console.log(pattern instanceof RegExp);  // 变量 pattern 是 RegExp 吗？
+	// 但是无法对基本数据类型进行操作（始终会返回 false）
+	console.log(b instanceof Boolean);  // false
+</script>
+</body>
+</html>

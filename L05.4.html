@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    /************************************************
+     * g：表示全局正则匹配 就是有多少个匹配的就匹配多少
+     * i：表示忽略大小写
+     * m：表示多行模式
+     * -----------------------------------------------
+     * ^：匹配字符串的开始
+     * $：匹配字符串的结束
+     * .：匹配除换行符以外的任意字符
+     * \w：匹配字母或数字或下划线或汉字
+     * \s：匹配任意的空白符
+     * \d：匹配数字
+     * \b：匹配单词的开始或结束
+     ************************************************/
+    new RegExp('/ok/g');//匹配所有的ok
+    new RegExp('/ok/i');//匹配第一个出现的ok或Ok或oK或OK
+    new RegExp('/ok/m');//在多行内匹配第一个出现的ok
+
+    /*
+     * 匹配第一个"bat"或"cat"，不区分大小写
+     */
+    var pattern1 = /[bc]at/i;
+
+    /*
+     * 与 pattern1 相同，只不过是使用构造函数创建的
+     */
+    var pattern2 = new RegExp("[bc]at", "i");
+
+    /************
+     * 在ECMAScript3中，正则表达式字面量始终会共享同一个 RegExp 实例
+     */
+    var re = null;
+    for (var i = 0; i < 10; i++) {
+        re = /cat/g;
+        re.test('catastrophe');
+    }
+    /**
+     只为/cat/创建了一个 RegExp 实例。由于实例属性（下一节介绍实例属性）不会重置，所以在循环中再次调用 test()方法会失败。这是因为第一次调用 test()找到了"cat"，但第二次调用是从索引为 3 的字符（上一次匹配的末尾）开始的，所以就找不到它了。由于会测试到字符串末尾，所以下一次再调用 test()就又从开头开始了。
+     */
+    /**
+     使用 RegExp 构造函数在每次循环中创建正则表达式。因为每次迭代都会创建一个新的RegExp 实例，所以每次调用 test()都会返回 true。
+     */
+    for (var i = 0; i < 10; i++) {
+        re = new RegExp('[bc]at','g');
+        re.test('catastrophe');
+    }
+
+    /**
+     RegExp实例属性
+     */
+    //global 判断正则表达式是否是否设置了 g
+    console.log(re.global);//true
+    //ignoreCase 判断正则表达式是否是否设置了 i
+    console.log(re.ignoreCase);//false
+    //multiline 判断正则表达式是否是否设置了 m
+    console.log(re.multiline);//false
+    //lastIndex 整数，表示开始搜索下一个匹配项的字符位置，从 0算起。
+    console.log(re.lastIndex);//3
+    //source 正则表达式的字符串表示
+    console.log(re.source);//[bc]at
+
+    /**
+     RegExp实例方法
+     */
+    //exec
+    var test0 = 'nononono';
+    var p0 = /no(no(no(no)?)?)?/;
+    var m0 = p0.exec(test0);
+    console.log(m0);
+    //非全局模式，因此每次调用 exec()返回的都是第一个匹配项
+    console.log(m0.index);
+    m0 = p0.exec(test0);
+    console.log(m0.index);
+    var test1 = 'okokokokok';
+    var p1 = /ok(ok(ok(ok)?)?)?/g;
+    var m1 = p1.exec(test1);
+    console.log(m1);
+    //全局模式，因此每次调用 exec()都会返回字符串中的下一个匹配项，直至搜索到字符串末尾为止
+    console.log(m1.index);
+    m1 = p1.exec(test1);
+    console.log(m1);
+    console.log(m1.index);
+    //test  接受一个字符串参数。在模式与该参数匹配的情况下返回true；否则，返回 false。
+    var text = "000-00-0000";
+    var pattern = /\d{3}-\d{2}-\d{4}/;
+
+    if (pattern.test(text)){
+        console.log("The pattern was matched.");
+    };
+    /bb/g.test('bbb');
+    /**
+     RegExp构造函数属性 输出以最近一次为准
+     */
+    var text1 = "this has been a short summer";
+    var pattern1 = /(.)hort/g;
+    if (pattern1.test(text1)){
+        console.log(RegExp.input);        // input ($_)         最近一次要匹配的字符串。Opera未实现此属性
+        console.log(RegExp.lastMatch);    // lastMatch ($&)     最近一次的匹配项。Opera未实现此属性
+        console.log(RegExp.lastParen);    // lastParen ($+)     最近一次匹配的捕获组。Opera未实现此属性
+        console.log(RegExp.leftContext);  // leftContext ($`)   input字符串中lastMatch之前的文本
+        console.log(RegExp.multiline);    // multiline ($*)     布尔值，表示是否所有表达式都使用多行模式。IE和Opera未实现此属性
+        console.log(RegExp.rightContext); // rightContext ($')  Input字符串中lastMatch之后的文本
+    }
+    //还有多达 9个用于存储捕获组的构造函数属性
+    var text2 = "this has been a short summer";
+    var pattern2 = /(be)e(.)/g;
+    if (pattern2.test(text2)){
+        console.log(RegExp.$1);       //sh
+        console.log(RegExp.$2);       //t
+    }
+</script>
+</body>
+</html>

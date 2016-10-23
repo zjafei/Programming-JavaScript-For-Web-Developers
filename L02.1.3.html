@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript">
+        console.log('01. 异步脚本前的脚本');
+    </script>
+    <!--异步脚本-->
+    <!--script的async属性是外部引用代码的异步执行属性 这里的异步是异步的执行 下载还是在遇到标签的时候就开始的-->
+    <!--异步脚本一定是在页面的 load 事件前执行 但是 在DOMContentLoaded 的前后都有可能执行 -->
+    <!--确保异步脚本之间互不依赖非常重要 -->
+    <!--异步脚本不要在加载期间修改 DOM -->
+    <script type="text/javascript" async="async" src="example07.js"></script>
+    <script type="text/javascript" async="async" src="example08.js"></script>
+    <script type="text/javascript" async="async" src="example09.js"></script>
+    <script type="text/javascript" async="async" src="example10.js"></script>
+    <script type="text/javascript">
+        console.log('02. 异步脚本后的脚本');
+    </script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log('08. DOM记载完毕');
+        }, false);
+        window.addEventListener("load", function () {
+            console.log('09. window加载完成');
+        }, false);
+    </script>
+
+
+</head>
+<body id="t">
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+    console.log('03. html结尾处的脚本');
+    // 这里总结一下 无论defer还是async 强调的是执行对于脚本的下载都是在运行代码的第一时间进行的
+</script>
+</body>
+</html>

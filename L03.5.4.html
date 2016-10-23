@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:45
+-->
+<script type="text/javascript">
+	// 如果操作数都是数值，执行常规的乘法计算，即两个正数或两个负数相乘的结果还是正数，而如果只有一个操作数有符号，那么结果就是负数。如果乘积超过了 ECMAScript数值的表示范围，则返回 Infinity 或-Infinity；
+	console.log(20 * -40);// -800
+	// 如果有一个操作数是 NaN，则结果是 NaN；
+	console.log(NaN * -40);// NaN
+	// 如果是 Infinity 与 0相乘，则结果是 NaN；
+	console.log(Infinity * 0);// NaN
+	// 如果是 Infinity 与非 0数值相乘，则结果是 Infinity 或-Infinity，取决于有符号操作数的符号；
+	console.log(Infinity * -20);// -Infinity
+	// 如果是 Infinity 与 Infinity 相乘，则结果是 Infinity；
+	console.log(Infinity * -Infinity);// -Infinity
+	// 如果有一个操作数不是数值，则在后台调用 Number()将其转换为数值，然后再应用上面的规则。
+	console.log({
+				toString: function () {
+					return '20'
+				}
+			} * -10);// -200
+	console.log({
+				valueOf: function () {
+					return 10;
+				},
+				toString: function () {
+					return '20';
+				}
+			} * -10);// -100
+	console.log(null * 5);// 0
+	console.log(undefined * 5);// NaN
+	console.log([2, 10] * -10);// NaN
+	console.log([2] * -10);// -20
+	console.log('ok' * -10);// -NaN
+	console.log('10' * -10);// -100
+
+	// 除法与乘法相近
+	console.log(5 / 4); // 1.25
+	console.log(-4 / 5); // -0.8
+	console.log(NaN / 0); // NaN
+	console.log(0 / NaN); // NaN
+	console.log(0 / 0); // NaN
+	console.log(0.000001 / 0); // Infinity
+	console.log(-0.000001 / 0); // -Infinity
+	console.log(Infinity / 999); // Infinity
+	console.log(Infinity / -999); // -Infinity
+	console.log(999 / Infinity); // 0
+	console.log(999 / -Infinity); // -0
+	console.log('ok' / -10);// -NaN
+	console.log('10' / -10);// -1
+	console.log([2, 10] / -10);// NaN
+	console.log([2] / -10);// -0.2
+	console.log(null / 5);// 0
+	console.log(undefined / 5);// NaN
+	console.log(5 / null);// Infinity
+	console.log(5 / undefined);// NaN
+	console.log({// -1
+				valueOf: function () {
+					return 10;
+				},
+				toString: function () {
+					return '20';
+				}
+			} / -10);
+	console.log({// -2
+				toString: function () {
+					return '20'
+				}
+			} / -10);
+
+	// 求模
+	console.log(5 % 4);// 1
+	console.log(5 % 0);// NaN
+	console.log(5 % Infinity);// 5
+	console.log(Infinity % 5);// NaN
+	console.log('ok' % 5);// NaN
+	console.log({// 2
+				valueOf: function () {
+					return 12;
+				},
+				toString: function () {
+					return '20';
+				}
+			} % 5);
+	console.log({// 1
+				toString: function () {
+					return '21';
+				}
+			} % 5);
+</script>
+</body>
+</html>

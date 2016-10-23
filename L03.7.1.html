@@ -1,0 +1,52 @@
+                <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title></title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+	<meta name="renderer" content="webkit">
+
+</head>
+<body>
+<!--
+ * Created by Eric MA
+ * Email: zjafei@gmail.com
+ * Date: 2015/9/18
+ * Time: 10:5t66t78uh76-45
+-->
+<script type="text/javascript">
+	// 参数来源于 arguments
+	function foo() {
+		console.log(arguments);
+	}
+	foo(1, 2, 3, 4, 5, 6);
+
+	// arguments元素的值永远与对应命名参数的值保持同步
+	function doAdd(num1, num2) {
+		arguments[1] = 10;
+		console.log(arguments[0] + num2);
+	}
+	doAdd(20, 20);// 30
+
+	//arguments 对象的长度是由传入的参数个数决定的，不是由定义函数时的命名参数的个数决定的。
+	function foo1(a, b, c, d) {
+		console.log(arguments.length);
+	}
+	foo1(2, 3);// 2
+
+	//ECMAScript中的所有参数传递的都是值，不可能通过引用传递参数。
+	var a = 10;
+	function foo2() {
+		arguments[0] = a;
+		console.log(arguments);
+	}
+	foo2();
+
+	// 在严格模式下arguments元素的重写与参数不同步
+	// 函数没有重载
+</script>
+</body>
+</html>
